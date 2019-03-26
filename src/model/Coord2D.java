@@ -15,6 +15,11 @@ public class Coord2D {
 		return new Coord2D(x + way.x, y + way.y);
 	}
 	
+	public int distanceManhattan (Coord2D other) {
+		
+		return Math.abs(x-other.x) + Math.abs(y-other.y);
+	}
+	
 	@Override
 	public String toString () {
 		
