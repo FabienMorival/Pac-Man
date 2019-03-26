@@ -3,6 +3,10 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Grille de jeu avec les cases et entites dans le niveau
+ * @author Fabien Morival
+ */
 public class Grid {
 	
 	Tile[][] tiles;
@@ -62,23 +66,26 @@ public class Grid {
 		String[] lines = src.split("\n");
 		TileState[][] states = new TileState[lines.length][];
 		
-		// Adding tiles
+		// Ajout des cases
 		for (int i = 0; i < states.length; i++) {
 			states[i] = new TileState[lines[i].length()];
 			for (int j = 0; j < states[i].length; j++) {
 				states[i][j] = TileState.charToTileState(lines[i].charAt(j));
 			}
 		}
-		// Creating the grid
+		// Creation de la grille
 		Grid g = new Grid(states);
 		
-		// Adding entities
+		// Ajout des entites
 		for (int i = 0; i < g.tiles.length; i++) {
 			for (int j = 0; j < g.tiles[i].length; j++) {
 				char c = lines[i].charAt(j);
 				switch (c) {
 				case 'B':
-					g.entities.add(new Ghost(g.tiles[i][j], new AlternativePattern(new RandomPattern(), new ShortestPathPattern())));
+					AlternativePattern pattern = new AlternativePattern(new RandomPattern(), new ShortestPathPattern());
+					pattern.setTimeBeforeSwitch(10, 15);
+					pattern.setWeights(new float[] { 1, 2 });
+					g.entities.add(new Ghost(g.tiles[i][j], pattern));
 					break;
 				case 'P': break;
 				case 'I': break;

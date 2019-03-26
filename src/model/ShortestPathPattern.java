@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+/**
+ * Pattern cherchant à suivre Pac-Man en évitant les murs
+ * @author Fabien Morival
+ */
 public class ShortestPathPattern implements Pattern {
 	
 	private class Node implements Comparable<Node> {
@@ -111,6 +115,12 @@ public class ShortestPathPattern implements Pattern {
 		return l;
 	}
 	
+	/**
+	 * Recupere les noeuds a des coordonnees specifiques
+	 * @param coords coordonnees auxquelles chercher les noeuds
+	 * @param q collection de noeuds dans laquelle effectuer la recherche
+	 * @return noeud a ces coordonnees, null si non existant
+	 */
 	private Node getNodeWithCoords (Coord2D coords, Collection<Node> q) {
 	
 		for (Node n : q)

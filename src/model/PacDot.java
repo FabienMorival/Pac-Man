@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * Entite devant etre recuperee par Pac-Man afin de completer le niveau
+ * @author Fabien Morival
+ */
 public class PacDot extends Bonus {
 
 	public PacDot(Tile tile) {

@@ -1,16 +1,40 @@
 package model;
 
-import java.util.Arrays;
-import java.util.List;
-
+/**
+ * Directions possibles de deplacement des personnages
+ * @author Fabien Morival
+ */
 public enum Way {
-
+	
+	/**
+	* Deplacement vers le haut (0, -1).
+	*/
 	N (0, -1),
+	
+	/**
+	* Deplacement vers le bas (0, 1).
+	*/
 	S (0, 1),
+	
+	/**
+	* Deplacement vers la droite (1, 0).
+	*/
 	E (1, 0),
+	
+	/**
+	* Deplacement vers la gauche (-1, 0).
+	*/
 	W (-1, 0);
 	
-	public int x, y;
+	/**
+	* Nombre de cases horizontales.
+	*/
+	public int x;
+	
+	/**
+	* Nombre de cases verticales.
+	*/
+	public int y;
 	
 	private Way (int x, int y) {
 		
@@ -18,6 +42,10 @@ public enum Way {
 		this.y = y;
 	}
 	
+	/**
+	 * Donne le deplacement oppose.
+	 * @return deplacement oppose au deplacement en cours
+	 */
 	public Way opposite () {
 		
 		switch (this) {
@@ -29,6 +57,10 @@ public enum Way {
 		}
 	}
 	
+	/**
+	* Tableau des 4 déplacements cardinaux
+	* @return tableau des 4 deplacements
+	*/
 	public static Way[] cardinal () {
 		
 		return new Way[]{N, S, W, E};

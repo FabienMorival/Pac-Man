@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * Etats d'une case
+ * @author Fabien Morival
+ */
 public enum TileState {
 	
 	CORRIDOR (' ', true),

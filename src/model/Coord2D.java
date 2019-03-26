@@ -1,8 +1,20 @@
 package model;
 
+/**
+ * Coordonnees bidimensionnelles
+ * @author Fabien Morivals
+ */
 public class Coord2D {
 
-	public int x, y;
+	/**
+	 * Coordonnee en abscisse
+	 */
+	public int x;
+	
+	/**
+	 * Coordonnee en ordonnee
+	 */
+	public int y;
 	
 	public Coord2D (int x, int y) {
 		
@@ -10,11 +22,21 @@ public class Coord2D {
 		this.y = y;
 	}
 	
+	/**
+	 * Coordonnees obtenues en suivant une direction
+	 * @param way direction a suivre
+	 * @return nouvelles coordonnees
+	 */
 	public Coord2D go (Way way) {
 		
 		return new Coord2D(x + way.x, y + way.y);
 	}
 	
+	/**
+	 * Distance entiere separant deux coordonnees en evitant les diagonales
+	 * @param other coordonnees avec lesquelles mesurer la distance
+	 * @return distance de manhattan entre les coordonnees
+	 */
 	public int distanceManhattan (Coord2D other) {
 		
 		return Math.abs(x-other.x) + Math.abs(y-other.y);

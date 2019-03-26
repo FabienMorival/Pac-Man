@@ -1,7 +1,14 @@
 package model;
 
+/**
+ * Fantome poursuivant Pac-Man
+ * @author Fabien Morival
+ */
 public class Ghost extends Actor {
 
+	/**
+	 * Pattern regissant les mouvements du fantome
+	 */
 	private Pattern pattern;
 	
 	public Ghost(Tile tile, Pattern pattern) {
@@ -10,6 +17,9 @@ public class Ghost extends Actor {
 		this.pattern = pattern;
 	}
 	
+	/**
+	 * Permet au fantome d'effectuer un deplacement
+	 */
 	public void act () {
 		
 		this.move(pattern.next(this));
