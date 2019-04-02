@@ -3,18 +3,24 @@ package model;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Observable;
 import java.util.function.Consumer;
 
 /**
  * Entite pouvant interagir avec les autres dans une grille
  * @author Fabien Morival
  */
-public abstract class Entity {
+public abstract class Entity extends Observable {
 
 	/**
 	 * Case sur laquelle est presente l'objet
 	 */
 	private Tile tile;
+	
+	/**
+	 * Nom permettant d'identifier l'entite
+	 */
+	private String name = null;
 	
 	/**
 	 * Evenements se produisant lorsque l'entite entre en collision avec d'autres
@@ -52,6 +58,30 @@ public abstract class Entity {
 	}
 	
 	/**
+	 * Renomme l'entite
+	 */
+	public void setName (String name) {
+		
+		this.name = name;
+	}
+	
+	/**
+	 * Nom permettant d'identifier l'entite
+	 */
+	public String getName () {
+		
+		return this.name;
+	}
+	
+	/**
+	 * Indique si l'entite possede un nom
+	 */
+	public boolean isNamed () {
+		
+		return this.name != null;
+	}
+	
+	/**
 	 * Verifie si l'entite est toujours existante dans une grille
 	 * @return true si l'entite est presente dans une grille
 	 */
@@ -67,7 +97,7 @@ public abstract class Entity {
 		
 		if (!this.exists())
 			return;
-		this.getGrid().entities.remove(this);
+		this.getGrid().clearEntity(this);
 		this.tile = null;
 	}
 	
@@ -106,6 +136,10 @@ public abstract class Entity {
 	public void onCollision (String type, Consumer<Entity> action) {
 		
 		this.collisionEvents.put(type, action);
+	}
+	
+	public void update() {
+		
 	}
 	
 	public abstract String getType ();

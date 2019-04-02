@@ -5,24 +5,19 @@ package model;
  * @author Fabien Morival
  */
 public class Ghost extends Actor {
-
-	/**
-	 * Pattern regissant les mouvements du fantome
-	 */
-	private Pattern pattern;
 	
-	public Ghost(Tile tile, Pattern pattern) {
+	public final static float DEFAULT_GHOST_FREQUENCY = 0.33f;
+	
+	public Ghost(Tile tile) {
 		
 		super(tile);
-		this.pattern = pattern;
+		this.setFrequency(DEFAULT_GHOST_FREQUENCY);
 	}
 	
-	/**
-	 * Permet au fantome d'effectuer un deplacement
-	 */
-	public void act () {
+	public Ghost(Tile tile, Behaviour behaviour) {
 		
-		this.move(pattern.next(this));
+		super(tile, behaviour);
+		this.setFrequency(DEFAULT_GHOST_FREQUENCY);
 	}
 
 	@Override

@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Pattern se deplacement aleatoirement dans la grille
+ * Comportement se deplacement aleatoirement dans la grille
  * @author Fabien Morival
  */
-public class RandomPattern implements Pattern {
+public class RandomBehaviour implements Behaviour {
 	
 	/**
 	 * Chaos par defaut du deplacement

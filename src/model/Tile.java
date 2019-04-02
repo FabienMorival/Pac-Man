@@ -63,6 +63,10 @@ public class Tile {
 	@Override
 	public String toString () {
 		
-		return this.state.toString();
+		switch (this.state) {
+		case WALL: return "X";
+		case DOOR: return "_";
+		default: return " ";
+		}
 	}
 }

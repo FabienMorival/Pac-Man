@@ -2,7 +2,7 @@ package model;
 
 /**
  * Coordonnees bidimensionnelles
- * @author Fabien Morivals
+ * @author Fabien Morival
  */
 public class Coord2D {
 
@@ -29,7 +29,7 @@ public class Coord2D {
 	 */
 	public Coord2D go (Way way) {
 		
-		return new Coord2D(x + way.x, y + way.y);
+		return way != null ? new Coord2D(x + way.x, y + way.y) : this;
 	}
 	
 	/**

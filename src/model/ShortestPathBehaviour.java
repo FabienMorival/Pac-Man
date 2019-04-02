@@ -8,10 +8,10 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 /**
- * Pattern cherchant à suivre Pac-Man en évitant les murs
+ * Comportement cherchant à suivre Pac-Man en évitant les murs
  * @author Fabien Morival
  */
-public class ShortestPathPattern implements Pattern {
+public class ShortestPathBehaviour implements Behaviour {
 	
 	private class Node implements Comparable<Node> {
 		

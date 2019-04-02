@@ -5,10 +5,15 @@ package model;
  * @author Fabien Morival
  */
 public class PacMan extends Actor {
+	
+	public final static String PACMAN_DEFAULT_NAME = "pac-man";
+	
+	public final static float DEFAULT_PACMAN_FREQUENCY = 0.3f;
 
 	public PacMan(Tile tile) {
 		
 		super(tile);
+		this.setFrequency(DEFAULT_PACMAN_FREQUENCY);
 		// Appelle une fonction lorsque Pac-Man entre en collision avec un fantome
 		this.onCollision("ghost", this::collideGhost);
 	}
@@ -19,6 +24,14 @@ public class PacMan extends Actor {
 	 */
 	private void collideGhost (Entity ghost) {
 		
+		this.die();
+	}
+	
+	private void die () {
+		
+		this.getGrid().getScoreBoard().loseStock();
+		this.setChanged();
+		this.notifyObservers();
 	}
 
 	@Override

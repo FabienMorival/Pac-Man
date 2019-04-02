@@ -7,10 +7,12 @@ import java.util.List;
  * Grille de jeu avec les cases et entites dans le niveau
  * @author Fabien Morival
  */
-public class Grid {
+public class Grid implements TimeBehaviour {
 	
-	Tile[][] tiles;
-	List<Entity> entities = new ArrayList<>();
+	private Tile[][] tiles;
+	private List<Entity> entities = new ArrayList<>();
+	private List<Spawner> spawners = new ArrayList<>();
+	private ScoreBoard scoreBoard = new ScoreBoard();
 
 	public Grid (TileState[][] states) {
 		
@@ -22,14 +24,69 @@ public class Grid {
 		}
 	}
 	
+	public int getX () {
+		
+		return this.tiles.length > 0 ? this.tiles[0].length : 0;
+	}
+	
+	public int getY () {
+
+		return this.tiles.length;
+	}
+	
 	public Tile getTile (Coord2D coords) {
 		
 		return this.tiles[coords.y][coords.x];
 	}
 	
+	public Tile getTile (int x, int y) {
+		
+		return this.getTile(new Coord2D(x, y));
+	}
+	
 	public List<Entity> getEntities () {
 		
 		return new ArrayList<>(this.entities);
+	}
+	
+	public void addSpawner (Spawner s) {
+		
+		this.spawners.add(s);
+	}
+	
+	public void addEntity (Entity e) {
+		
+		this.entities.add(e);
+	}
+	
+	public ScoreBoard getScoreBoard () {
+		
+		return this.scoreBoard;
+	}
+	
+	public void init () {
+		
+		for (Spawner s : spawners)
+			s.spawn();
+	}
+	
+	public void clear () {
+		
+		List<Entity> toErase = this.findEntitiesByType("ghost");
+		toErase.add(this.findPacMan());
+		for (Entity e : toErase)
+			e.clear();
+	}
+	
+	public void reset () {
+		
+		this.clear();
+		this.init();
+	}
+	
+	public void clearEntity (Entity e) {
+		
+		this.entities.remove(e);
 	}
 	
 	public List<Entity> findEntitiesAtPosition (Coord2D pos) {
@@ -50,10 +107,17 @@ public class Grid {
 		return eap;
 	}
 	
+	public Entity findEntityByName (String name) {
+		
+		for (Entity e : entities)
+			if (e.isNamed() && e.getName().equals(name))
+				return e;
+		return null;
+	}
+	
 	public PacMan findPacMan () {
 		
-		List<Entity> pacmans = this.findEntitiesByType("pac-man");
-		return pacmans.isEmpty() ? null : (PacMan) pacmans.get(0);
+		return (PacMan) this.findEntityByName(PacMan.PACMAN_DEFAULT_NAME);
 	}
 	
 	public int distanceBetween (Coord2D from, Coord2D to) {
@@ -61,46 +125,11 @@ public class Grid {
 		return 1;
 	}
 	
-	public static Grid read (String src) {
+	public void update () {
 		
-		String[] lines = src.split("\n");
-		TileState[][] states = new TileState[lines.length][];
-		
-		// Ajout des cases
-		for (int i = 0; i < states.length; i++) {
-			states[i] = new TileState[lines[i].length()];
-			for (int j = 0; j < states[i].length; j++) {
-				states[i][j] = TileState.charToTileState(lines[i].charAt(j));
-			}
-		}
-		// Creation de la grille
-		Grid g = new Grid(states);
-		
-		// Ajout des entites
-		for (int i = 0; i < g.tiles.length; i++) {
-			for (int j = 0; j < g.tiles[i].length; j++) {
-				char c = lines[i].charAt(j);
-				switch (c) {
-				case 'B':
-					AlternativePattern pattern = new AlternativePattern(new RandomPattern(), new ShortestPathPattern());
-					pattern.setTimeBeforeSwitch(10, 15);
-					pattern.setWeights(new float[] { 1, 2 });
-					g.entities.add(new Ghost(g.tiles[i][j], pattern));
-					break;
-				case 'P': break;
-				case 'I': break;
-				case 'C': break;
-				case '@':
-					g.entities.add(new PacMan(g.tiles[i][j]));
-					break;
-				case '.':
-					g.entities.add(0, new PacDot(g.tiles[i][j]));
-					break;
-				case 'o': break;
-				}
-			}
-		}
-		return g;
+		for (Entity e : this.getEntities())
+			if (e.exists())
+				e.update();
 	}
 	
 	@Override

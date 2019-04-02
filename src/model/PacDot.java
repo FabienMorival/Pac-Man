@@ -5,6 +5,8 @@ package model;
  * @author Fabien Morival
  */
 public class PacDot extends Bonus {
+	
+	public final static int PACDOT_SCORE = 10;
 
 	public PacDot(Tile tile) {
 		
@@ -14,6 +16,7 @@ public class PacDot extends Bonus {
 	@Override
 	public void apply(Entity other) {
 
+		other.getGrid().getScoreBoard().addScore(PACDOT_SCORE);
 	}
 
 	@Override
