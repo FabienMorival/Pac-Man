@@ -6,8 +6,8 @@ import console.GridView;
 import controller.ClassicLevelManager;
 import loader.MapLoader;
 import model.Grid;
-import model.Time;
-import model.TimeBehaviour;
+import time.Time;
+import time.TimeBehaviour;
 
 /**
  * Classe principale chargee de lancer le jeu

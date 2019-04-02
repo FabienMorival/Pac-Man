@@ -1,5 +1,7 @@
 package model;
 
+import time.Time;
+
 /**
  * Entite capable de se mouvoir independamment dans la grille
  * @author Fabien Morival

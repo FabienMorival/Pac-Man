@@ -8,12 +8,12 @@ public class PacMan extends Actor {
 	
 	public final static String PACMAN_DEFAULT_NAME = "pac-man";
 	
-	public final static float DEFAULT_PACMAN_FREQUENCY = 0.3f;
+	public final static float DEFAULT_PACMAN_SPEED = 0.3f;
 
 	public PacMan(Tile tile) {
 		
 		super(tile);
-		this.setFrequency(DEFAULT_PACMAN_FREQUENCY);
+		this.setFrequency(DEFAULT_PACMAN_SPEED);
 		// Appelle une fonction lorsque Pac-Man entre en collision avec un fantome
 		this.onCollision("ghost", this::collideGhost);
 	}

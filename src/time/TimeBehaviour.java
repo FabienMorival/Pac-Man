@@ -1,4 +1,4 @@
-package model;
+package time;
 
 /**
  * Comportement performant une action au cours du temps. Doit être capturé par {@link Time}

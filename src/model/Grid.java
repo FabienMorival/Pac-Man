@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import time.TimeBehaviour;
+
 /**
  * Grille de jeu avec les cases et entites dans le niveau
  * @author Fabien Morival
