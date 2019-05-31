@@ -28,7 +28,7 @@ public class Launcher {
 		
 		ClassicLevelManager manager = new ClassicLevelManager(level);
 		GridView view = new GridView(level);
-		
+
 		Time.capture(new TimeBehaviour() {
 			
 			public void update () {
